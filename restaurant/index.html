@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Grill - Creative Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-pink: #ff006e;
+            --neon-blue: #00d4ff;
+            --neon-purple: #b537f2;
+            --neon-cyan: #00ffff;
+            --neon-green: #39ff14;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050812;
+            --text-color: #ffffff;
+            --glow-shadow: 0 0 20px rgba(255, 0, 110, 0.8), 0 0 40px rgba(0, 212, 255, 0.6);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background-color: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--neon-pink);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* ========== NEON TEXT EFFECTS ========== */
+        .neon-text {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 70px var(--neon-pink), 0 0 80px var(--neon-pink), 0 0 100px var(--neon-pink);
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 70px var(--neon-pink), 0 0 80px var(--neon-pink), 0 0 100px var(--neon-pink);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0e3f 50%, #0a0e27 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: slideInDown 1s ease-out;
+        }
+
+        .neon-title {
+            font-size: 5rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 70px var(--neon-pink), 0 0 80px var(--neon-pink), 0 0 100px var(--neon-pink), 0 0 150px var(--neon-blue);
+            animation: neon-glow 3s ease-in-out infinite;
+        }
+
+        .neon-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            padding: 15px 40px;
+            border: 2px solid var(--neon-pink);
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.8), 0 0 50px rgba(0, 212, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        @keyframes neon-glow {
+            0%, 100% {
+                text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 70px var(--neon-pink), 0 0 80px var(--neon-pink), 0 0 100px var(--neon-pink), 0 0 150px var(--neon-blue);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 50px var(--neon-pink), 0 0 80px var(--neon-pink), 0 0 100px var(--neon-pink), 0 0 150px var(--neon-pink), 0 0 200px var(--neon-blue);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .neon-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            opacity: 0.5;
+        }
+
+        .line-1 {
+            width: 100%;
+            height: 2px;
+            top: 30%;
+            animation: scanline 8s linear infinite;
+        }
+
+        .line-2 {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            animation: scanline 10s linear infinite 2s;
+        }
+
+        .line-3 {
+            width: 100%;
+            height: 2px;
+            top: 70%;
+            animation: scanline 12s linear infinite 4s;
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* ========== MENU SECTION ========== */
+        .menu {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a0e3f 50%, #0a0e27 100%);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-category {
+            background: rgba(15, 20, 50, 0.8);
+            padding: 2rem;
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.5), 0 0 50px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item h4 {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .menu-item .description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .menu-item .price {
+            color: var(--neon-green);
+            font-size: 1rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #1a0e3f 0%, #0a0e27 100%);
+        }
+
+        .about-box {
+            background: rgba(15, 20, 50, 0.8);
+            padding: 2rem;
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .about-box p {
+            margin-bottom: 1.5rem;
+            color: #ddd;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a0e3f 50%, #0a0e27 100%);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background: rgba(15, 20, 50, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .info-box h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-box p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(15, 20, 50, 0.8);
+            padding: 2rem;
+            border: 2px solid var(--neon-purple);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(181, 55, 242, 0.3);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            background: rgba(10, 14, 39, 0.9);
+            border: 1px solid var(--neon-cyan);
+            color: var(--text-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5), inset 0 0 10px rgba(255, 0, 110, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background-color: rgba(10, 14, 39, 0.95);
+            border-top: 2px solid var(--neon-pink);
+            padding: 2rem;
+            text-align: center;
+            color: #aaa;
+            box-shadow: 0 -10px 30px rgba(255, 0, 110, 0.2);
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .neon-title {
+                font-size: 2.5rem;
+            }
+
+            .neon-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">NEON GRILL</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="neon-title">NEON GRILL</h1>
+            <p class="neon-subtitle">Experience Fine Dining in Neon Light</p>
+            <button class="cta-button">Reserve Table</button>
+        </div>
+        <div class="neon-lines">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <h2 class="section-title neon-text">Our Menu</h2>
+        <div class="menu-container">
+            <!-- Appetizers -->
+            <div class="menu-category">
+                <h3 class="category-title">Appetizers</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h4>Crispy Calamari</h4>
+                        <p class="description">Tender squid rings with spicy aioli</p>
+                        <span class="price">$12.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Neon Nachos</h4>
+                        <p class="description">Loaded with cheese, jalapeños & sour cream</p>
+                        <span class="price">$10.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Shrimp Tempura</h4>
+                        <p class="description">Crispy battered shrimp with sweet chili sauce</p>
+                        <span class="price">$13.99</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Courses -->
+            <div class="menu-category">
+                <h3 class="category-title">Main Courses</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h4>Grilled Ribeye Steak</h4>
+                        <p class="description">Premium cut with truffle butter & asparagus</p>
+                        <span class="price">$34.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Pan-Seared Salmon</h4>
+                        <p class="description">Fresh Atlantic salmon with lemon glaze</p>
+                        <span class="price">$28.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Wagyu Burger</h4>
+                        <p class="description">Gourmet burger with truffle fries</p>
+                        <span class="price">$22.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Lobster Pasta</h4>
+                        <p class="description">Fresh lobster in creamy garlic sauce</p>
+                        <span class="price">$32.99</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-category">
+                <h3 class="category-title">Desserts</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h4>Chocolate Lava Cake</h4>
+                        <p class="description">Molten chocolate with vanilla ice cream</p>
+                        <span class="price">$8.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Neon Cheesecake</h4>
+                        <p class="description">Classic NY cheesecake with berry topping</p>
+                        <span class="price">$7.99</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Crème Brûlée</h4>
+                        <p class="description">French classic with caramelized sugar top</p>
+                        <span class="price">$8.99</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="menu-category">
+                <h3 class="category-title">Beverages</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <h4>House Wine</h4>
+                        <p class="description">Selection of premium wines</p>
+                        <span class="price">From $8</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Craft Cocktails</h4>
+                        <p class="description">Creative house special drinks</p>
+                        <span class="price">From $12</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Premium Spirits</h4>
+                        <p class="description">Top shelf selections</p>
+                        <span class="price">From $15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title neon-text">About Us</h2>
+            <div class="about-box">
+                <p>Welcome to Neon Grill, where culinary excellence meets modern aesthetics. Our restaurant combines world-class cuisine with stunning neon-lit ambiance, creating an unforgettable dining experience.</p>
+                <p>Founded in 2024, we pride ourselves on using only the finest ingredients and innovative cooking techniques. Our chef-driven menu changes seasonally to reflect the best produce and proteins available.</p>
+                <p>Whether you're celebrating a special occasion or enjoying a casual night out, Neon Grill offers the perfect blend of elegance, creativity, and cutting-edge design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title neon-text">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-box">
+                    <h3>📍 Location</h3>
+                    <p>123 Neon Street<br>Downtown District<br>City, State 12345</p>
+                </div>
+                <div class="info-box">
+                    <h3>📞 Phone</h3>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="info-box">
+                    <h3>📧 Email</h3>
+                    <p>info@neongrill.com</p>
+                </div>
+                <div class="info-box">
+                    <h3>⏰ Hours</h3>
+                    <p>Mon-Thu: 5PM - 11PM<br>Fri-Sat: 5PM - 12AM<br>Sun: 5PM - 10PM</p>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Neon Grill. All rights reserved. | Designed with ✨ and Neon Light</p>
+        <div class="social-links">
+            <a href="#" class="social-link">Facebook</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        // ========== MOBILE MENU TOGGLE ==========
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+        // ========== SMOOTH SCROLL ON NAV LINKS ==========
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    if (navMenu) navMenu.style.display = 'none';
+                }
+            });
+        });
+
+        // ========== FORM SUBMISSION ==========
+        const contactForm = document.querySelector('.contact-form');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = contactForm.querySelector('input[type="text"]').value;
+                const email = contactForm.querySelector('input[type="email"]').value;
+                const message = contactForm.querySelector('textarea').value;
+                
+                if (name && email && message) {
+                    alert(`Thank you ${name}! We received your message. We'll contact you at ${email} soon!`);
+                    contactForm.reset();
+                } else {
+                    alert('Please fill in all fields!');
+                }
+            });
+        }
+
+        // ========== RESERVATION BUTTON ==========
+        const ctaButton = document.querySelector('.cta-button');
+
+        if (ctaButton) {
+            ctaButton.addEventListener('click', (e) => {
+                if (e.target.textContent === 'Reserve Table') {
+                    alert('Thank you for your interest! Please call us at (555) 123-4567 to make a reservation.');
+                }
+            });
+        }
+
+        // ========== MENU ITEM HOVER EFFECTS ==========
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(10px)';
+                item.style.transition = 'all 0.3s ease';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+
+        // ========== SCROLL-TO-TOP BUTTON ==========
+        const scrollButton = document.createElement('button');
+        scrollButton.innerHTML = '↑';
+        scrollButton.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #ff006e, #b537f2);
+            color: white;
+            border: 2px solid #ff006e;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            transition: all 0.3s ease;
+        `;
+
+        document.body.appendChild(scrollButton);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollButton.style.display = 'block';
+            } else {
+                scrollButton.style.display = 'none';
+            }
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        scrollButton.addEventListener('mouseover', () => {
+            scrollButton.style.boxShadow = '0 0 30px rgba(255, 0, 110, 0.8), 0 0 50px rgba(0, 212, 255, 0.6)';
+        });
+
+        scrollButton.addEventListener('mouseout', () => {
+            scrollButton.style.boxShadow = '0 0 20px rgba(255, 0, 110, 0.5)';
+        });
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') {
+                const menuSection = document.querySelector('#menu');
+                if (menuSection) {
+                    menuSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            if (e.key === 'c' || e.key === 'C') {
+                const contactSection = document.querySelector('#contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        console.log('🎨 Neon Grill Website Loaded! Press M for Menu or C for Contact!');
+    </script>
+</body>
+</html>
